@@ -3,7 +3,7 @@
 <pre>
 <font size='16'>Install Ubuntu 16.04</font>
 <div class="text" style=" text-align:center;">
-<font size='8'>
+<font size='4'>
 1. partition:
 1. swap: ~16 GiB
 2. /: ~100 GiB
@@ -104,6 +104,18 @@ MATLAB support)5. INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
 7. make runtest -j8 (optional)
 8. make pycaffe (optional)
 9. make matcaffe (optional)
+Issues:
+1. Error (make all) : ./include/caffe/util/hdf5.hpp:6:18: fatal error: hdf5.h: No
+such file or directory. You should revise your makefile.config and makefile as
+following:
+1. INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial/
+(makefile.config)
+2. LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_serial_hl
+hdf5_serial (makefile)
+2. Error ‘fatal error: pyconfig.h: No such file or directory’
+1. export CPLUS_INCLUDE_PATH=/usr/include/python2.7
+3. Login loop, cannot enter desktop
+1. reinstall Nvidia driver
 </font>
 </div>
   </pre>
