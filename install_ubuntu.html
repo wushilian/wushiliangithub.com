@@ -1,0 +1,105 @@
+<html>
+<body>
+Install Ubuntu 16.04
+1. partition:
+1. swap: ~16 GiB
+2. /: ~100 GiB
+3. /home: the rest
+4. If there are n hard disk, for example, 2 hard disks is existing in your
+computer. You can rename them /data1, /data2.
+5. Then change the right of the folder data1, folder data2. For example,
+you can execute the su enter the root right first and execute sudo
+chmod –R 777 /data1,or sudo chmod –R 777 /data2.
+6. Then you can build a link(you can bulid a folder data in the Desktop),
+let the folder data1 point to the foler data(in the Desktop).
+7. Execute the ln -sf /data1 /home/xx/Desktop/data
+2. grub: use default setting
+3. Attention, if you cannot enter tty1-6:
+1. sudo gedit /etc/default/grub
+2. set GRUB_CMDLINE_LINUX_DEFAULT = “nomodeset”
+3. sudo update-grub
+4. sudo reboot
+4. Pay attention to the phenomenon that your computer is slow, please execute
+the following:
+1.sudo gedit /etc/default/grub
+2.set GRUB_CMDLINE_LINUX_DEFAULT = “quiet splash”
+3.sudo update-grub
+4.sudo rebootInstall Nvidia driver 3xx.xx
+1.First, you should do the following: (shut nouveau)
+1. sudo gedit /etc/modprobe.d/blacklist.conf
+2. add the following:
+(1).blacklist nouveau
+(2).options nouveau modeset=0
+3. sudo update-initramfs –u
+4. sudo reboot
+5. execute “lsmod | grep nouveau” to check out there is nothing to display.
+2.Second, you can do the following to install the Nvidia driver:
+1. Ctrl+Alt+F1 (enter into tty1)
+2. sudo service lightdm stop (stop x-window service)
+3. sudo bash ./NVIDIA-Linux-x86_64-3xx.xx.run -no-x-check
+-no-nouveau-check -no-opengl-files (latest version)
+4. sudo service lightdm start
+Install CUDA 8.0
+1. sudo bash ./cuda_8.0.xx_linux-run.run (use .run version instead of .deb )
+1. DO NOT Install NVIDIA Accelerated Graphics Driver (n)
+2. choose y for other options
+2. sudo apt-get update
+3. sudo gedit /etc/ld.so.conf.d/cuda.conf (add)
+1. /usr/local/cuda/lib64
+2. /lib
+4. sudo ldconfig -v
+Install cuDNN v6.x
+1. tar xzvf cudnn-8.0-linux-x64-v6.x.tgz
+2. sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+3. sudo cp cuda/lib64/libcudnn.* /usr/local/cuda/lib64
+4. sudo ln -sf /usr/local/cuda/lib64/libcudnn.so.6.x.x
+/usr/local/cuda/lib64/libcudnn.so.6
+5. sudo ln -sf /usr/local/cuda/lib64/libcudnn.so.6
+/usr/local/cuda/lib64/libcudnn.so
+6. sudo ldconfig -vInstall dependence
+1. sudo apt-get install -y build-essential git
+2. sudo apt-get install -y libprotobuf-dev libleveldb-dev libsnappy-dev
+libopencv-dev libboost-all-dev libhdf5-serial-dev libgflags-dev
+libgoogle-glog-dev liblmdb-dev protobuf-compiler protobuf-c-compiler
+libyaml-dev
+3. sudo apt-get install -y python-pip python-dev python-opencv python-numpy
+python-scipy python-matplotlib python-sklearn python-skimage python-h5py
+python-protobuf python-leveldb python-networkx python-nose
+python-pandas python-gflags cython ipython
+4. sudo pip install --upgrade pip
+5. sudo pip install jupyter (optional)
+Install BLAS
+1. choose ATLAS， MKL or OpenBLAS
+2. ATLAS:
+1. sudo apt-get install -y libatlas-base-dev
+3. MKL (optional):
+1. sudo bash install_GUI.sh
+2. sudo gedit /etc/ld.so.conf.d/intel_mkl.conf (add)
+1. /opt/intel/lib/intel64
+2. /opt/intel/mkl/lib/intel64
+3. sudo ldconfig -v
+Install glog 0.3.3
+1. wget https://github.com/google/glog/archive/v0.3.3.tar.gz
+2. tar xzvf v0.3.3.tar.gz
+3. cd glog-0.3.3
+4. ./configure && make && sudo make install
+Install caffe
+1. git clone https://github.com/BVLC/caffe.git
+2. cd caffe
+3. cp Makefile.config.example Makefile.config
+4. gedit Makefile.config
+1. USE_CUDNN := 1 (del “#”)
+2. BLAS := atlas (or mkl, open)
+3. WITH_PYTHON_LAYER := 1 (del “#” to build with python support)
+4. MATLAB_DIR := /usr/local/MATLAB/R20xxx/ (del “#” to build with
+MATLAB support)5. INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
+/usr/lib/x86_64-linux-gnu/hdf5/serial/include
+6. LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib
+/usr/lib/x86_64-linux-gnu/hdf5/serial
+5. make all -j8
+6. make test -j8 (optional)
+7. make runtest -j8 (optional)
+8. make pycaffe (optional)
+9. make matcaffe (optional)
+</body>
+</html>
