@@ -4,7 +4,7 @@
 <font size='16'>Install Ubuntu 16.04</font>
 <div class="text" style=" text-align:left;">
 <font size='4'>
-<font color='red'>1. partition:</font>
+<font size='7' color='red'>1. partition:</font>
 1. swap: ~16 GiB
 2. /: ~100 GiB
 3. /home: the rest
@@ -23,7 +23,7 @@ let the folder data1 point to the foler data(in the Desktop).
 3. sudo update-grub
 4. sudo reboot
 4. Pay attention to the phenomenon that your computer is slow, please execute
-the following:
+<font size='7' color='red'>the following:</font>
 1.sudo gedit /etc/default/grub
 2.set GRUB_CMDLINE_LINUX_DEFAULT = “quiet splash”
 3.sudo update-grub
@@ -42,7 +42,7 @@ the following:
 3. sudo bash ./NVIDIA-Linux-x86_64-3xx.xx.run -no-x-check
 -no-nouveau-check -no-opengl-files (latest version)
 4. sudo service lightdm start
-Install CUDA 8.0
+<font size='7' color='red'>Install CUDA 8.0</font>
 1. sudo bash ./cuda_8.0.xx_linux-run.run (use .run version instead of .deb )
 1. DO NOT Install NVIDIA Accelerated Graphics Driver (n)
 2. choose y for other options
@@ -51,7 +51,7 @@ Install CUDA 8.0
 1. /usr/local/cuda/lib64
 2. /lib
 4. sudo ldconfig -v
-Install cuDNN v6.x
+<font size='7' color='red'>Install cuDNN v6.x</font>
 1. tar xzvf cudnn-8.0-linux-x64-v6.x.tgz
 2. sudo cp cuda/include/cudnn.h /usr/local/cuda/include
 3. sudo cp cuda/lib64/libcudnn.* /usr/local/cuda/lib64
@@ -71,7 +71,7 @@ python-protobuf python-leveldb python-networkx python-nose
 python-pandas python-gflags cython ipython
 4. sudo pip install --upgrade pip
 5. sudo pip install jupyter (optional)
-Install BLAS
+<font size='7' color='red'>Install BLAS</font>
 1. choose ATLAS， MKL or OpenBLAS
 2. ATLAS:
 1. sudo apt-get install -y libatlas-base-dev
@@ -81,12 +81,12 @@ Install BLAS
 1. /opt/intel/lib/intel64
 2. /opt/intel/mkl/lib/intel64
 3. sudo ldconfig -v
-Install glog 0.3.3
+<font size='7' color='red'>Install glog 0.3.3</font>
 1. wget https://github.com/google/glog/archive/v0.3.3.tar.gz
 2. tar xzvf v0.3.3.tar.gz
 3. cd glog-0.3.3
 4. ./configure && make && sudo make install
-Install caffe
+<font size='7' color='red'>Install caffe</font>
 1. git clone https://github.com/BVLC/caffe.git
 2. cd caffe
 3. cp Makefile.config.example Makefile.config
@@ -104,7 +104,7 @@ MATLAB support)5. INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
 7. make runtest -j8 (optional)
 8. make pycaffe (optional)
 9. make matcaffe (optional)
-Issues:
+<font size='7' color='red'>Issues:</font>
 1. Error (make all) : ./include/caffe/util/hdf5.hpp:6:18: fatal error: hdf5.h: No
 such file or directory. You should revise your makefile.config and makefile as
 following:
